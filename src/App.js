@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 
-const App = () => {
-  const graphDivs = 1;
-  const graphSize = 250;
+const graphDivs = 1;
+const graphSize = 250;
+const numSides = 4;
 
+const App = () => {
   const [angle, setAngle] = useState(45);
 
   let frame;
@@ -18,8 +19,8 @@ const App = () => {
     <div id="App">
       <div id="Scene">
         <div id="Cube" style={{ transform: `rotateY(${angle}deg)` }}>
-          {["front", "left", "right", "back"].map(side => (
-            <Face key={side} {...{ graphSize, graphDivs, angle, id: side }} />
+          {[...Array(numSides).keys()].map(side => (
+            <Face {...{ angle, side, key: side }} />
           ))}
         </div>
       </div>
@@ -28,8 +29,16 @@ const App = () => {
 };
 export default App;
 
-const Face = ({ id, graphSize, graphDivs, angle }) => (
-  <div className="Face" id={id} style={{ width: graphSize, height: graphSize }}>
+const Face = ({ side, angle, style }) => (
+  <div
+    className="Face"
+    style={{
+      ...style,
+      width: graphSize,
+      height: graphSize,
+      transform: `rotateY(${(360 / numSides) * side}deg) translateZ(125px)`
+    }}
+  >
     <svg width={graphSize} height={graphSize}>
       <SineWave {...{ graphSize, angle }} />
       {[...Array(graphDivs + 1).keys()].map(i => {
@@ -45,7 +54,7 @@ const Face = ({ id, graphSize, graphDivs, angle }) => (
   </div>
 );
 
-const SineWave = ({ graphSize, angle }) => {
+const SineWave = ({ angle }) => {
   const divs = 16 - (angle % 8);
   const Zero = graphSize / 2;
   const Frequency = (Math.PI * 2) / divs;
