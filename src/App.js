@@ -31,13 +31,13 @@ export default App;
 const Face = ({ id, graphSize, graphDivs, angle }) => (
   <div className="Face" id={id} style={{ width: graphSize, height: graphSize }}>
     <svg width={graphSize} height={graphSize}>
+      <SineWave {...{ graphSize, angle }} />
       {[...Array(graphDivs + 1).keys()].map(i => {
         let w = 0 + (graphSize / graphDivs) * i;
         return (
           <g key={i} id="grid">
             <line x1={0} x2={graphSize} y1={w} y2={w} />
             {/* <line y1={0} y2={graphSize} x1={w} x2={w} /> */}
-            <SineWave {...{ graphSize, angle }} />
           </g>
         );
       })}
