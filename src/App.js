@@ -56,7 +56,7 @@ const Face = ({ side, angle, style }) => (
 
 const SineWave = ({ angle }) => {
   const numPoints = 16 - (angle % 8);
-  const Zero = graphSize / 2;
+  const Origin = graphSize / 2;
   const Frequency = (Math.PI * 2) / numPoints;
   const Phase = (angle * Math.PI * 4) / 180;
   const Amplitude = graphSize / 2;
@@ -65,7 +65,7 @@ const SineWave = ({ angle }) => {
     <circle
       key={i}
       cx={(graphSize / numPoints) * i}
-      cy={Zero + Math.sin(Frequency * i + Phase) * Amplitude}
+      cy={Origin + Math.sin(Frequency * i + Phase) * Amplitude}
       r={1}
       style={{ fill: `hsla(${(360 / numPoints) * i}, 100%, 50%)` }}
     />
