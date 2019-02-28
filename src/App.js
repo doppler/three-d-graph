@@ -46,7 +46,7 @@ const Face = ({ id, graphSize, graphDivs, angle }) => (
 );
 
 const SineWave = ({ graphSize, angle }) => {
-  const divs = 63;
+  const divs = 16 - (angle % 8);
   const Zero = graphSize / 2;
   const Frequency = (Math.PI * 2) / divs;
   const Phase = (angle * Math.PI * 4) / 180;
