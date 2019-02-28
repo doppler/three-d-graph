@@ -30,3 +30,13 @@ line {
 circle {
   stroke-width: 0;
 }
+a {
+  position: absolute;
+  bottom: 0.5em;
+  right: 1em;
+  text-decoration: none;
+  color: hsl(270, 100%, 33%);
+  border: 1px solid hsl(270, 100%, 25%);
+  border-radius: 0.25em;
+  padding: 0.25em 0.5em 0.25em 0.5em;
+}

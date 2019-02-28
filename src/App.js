@@ -8,7 +8,7 @@ const translateLength =
   graphSize / 2 / Math.tan(((360 / numSides / 2) * Math.PI) / 180);
 
 const App = () => {
-  const [angle, setAngle] = useState(45);
+  const [angle, setAngle] = useState(0);
 
   let frame;
   useEffect(() => {
@@ -31,6 +31,13 @@ const App = () => {
           ))}
         </div>
       </div>
+      <a
+        href="https://github.com/doppler/three-d-graph/blob/master/src/App.js"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        View Source
+      </a>
     </div>
   );
 };
