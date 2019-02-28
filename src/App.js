@@ -12,16 +12,18 @@ const App = () => {
 
   let frame;
   useEffect(() => {
-    cancelAnimationFrame(frame);
     requestAnimationFrame(() =>
       setAngle(angle => (angle === 360 / numSides - 1 ? 0 : angle + 0.25))
     );
+    return () => {
+      cancelAnimationFrame(frame);
+    };
   }, [angle]);
   useEffect(() => {
     document
       .getElementById("Scene")
       .style.setProperty("perspective", `${translateLength * 2.5}px`);
-  });
+  }, []);
   return (
     <div id="App">
       <div id="Scene">
@@ -70,7 +72,7 @@ const Face = ({ side, angle, style }) => (
 );
 
 const SineWave = ({ angle }) => {
-  const numPoints = 84;
+  const numPoints = Math.round((graphSize / numSides) * 2);
   const Origin = graphSize / 2;
   const Frequency = (Math.PI * 2) / numPoints;
   const Phase = (angle * Math.PI * numSides) / 180;
