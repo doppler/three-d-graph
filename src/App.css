@@ -17,6 +17,11 @@
 }
 .Face {
   position: absolute;
+  background-image: linear-gradient(
+    hsla(270, 100%, 20%, 0.05),
+    95%,
+    hsla(270, 100%, 50%, 0.2)
+  );
 }
 .Face#front {
   transform: rotateY(0deg) translateZ(125px);
@@ -46,7 +51,6 @@
   /* transform: rotateY(22.5deg); */
 }
 svg {
-  background-color: hsla(270, 100%, 50%, 0.1);
 }
 
 circle,
@@ -56,7 +60,10 @@ rect {
 line,
 circle,
 rect {
-  stroke: hsla(90, 100%, 50%, 0.5);
+  stroke: hsla(270, 100%, 50%, 0.25);
+}
+text {
+  stroke: white;
 }
 circle {
   stroke-width: 0;

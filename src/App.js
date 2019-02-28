@@ -19,7 +19,7 @@ const App = () => {
       <div id="Scene">
         <div id="Cube" style={{ transform: `rotateY(${angle}deg)` }}>
           {["front", "left", "right", "back"].map(side => (
-            <Face {...{ graphSize, graphDivs, angle, id: side }} />
+            <Face key={side} {...{ graphSize, graphDivs, angle, id: side }} />
           ))}
         </div>
       </div>
@@ -36,7 +36,7 @@ const Face = ({ id, graphSize, graphDivs, angle }) => (
         return (
           <g key={i} id="grid">
             <line x1={0} x2={graphSize} y1={w} y2={w} />
-            <line y1={0} y2={graphSize} x1={w} x2={w} />
+            {/* <line y1={0} y2={graphSize} x1={w} x2={w} /> */}
             <SineWave {...{ graphSize, angle }} />
           </g>
         );
@@ -46,14 +46,17 @@ const Face = ({ id, graphSize, graphDivs, angle }) => (
 );
 
 const SineWave = ({ graphSize, angle }) => {
-  const divs = 200;
+  const divs = 63;
+  const Zero = graphSize / 2;
+  const Frequency = (Math.PI * 2) / divs;
+  const Phase = (angle * Math.PI * 4) / 180;
+  const Amplitude = graphSize / 2;
+
   return [...Array(divs).keys()].map(i => (
     <circle
       key={i}
       cx={(graphSize / divs) * i}
-      cy={
-        graphSize / 2 + (Math.sin(((Math.PI * 2) / divs) * i) * graphSize) / 2
-      }
+      cy={Zero + Math.sin(Frequency * i + Phase) * Amplitude}
       r={1}
       style={{ fill: `hsla(${(360 / divs) * i}, 100%, 50%)` }}
     />
