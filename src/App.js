@@ -14,7 +14,7 @@ const App = () => {
   useEffect(() => {
     cancelAnimationFrame(frame);
     requestAnimationFrame(() =>
-      setAngle(angle => (angle === 360 / numSides - 1 ? 0 : angle + 0.2))
+      setAngle(angle => (angle === 360 / numSides - 1 ? 0 : angle + 0.25))
     );
   }, [angle]);
   useEffect(() => {
@@ -63,19 +63,30 @@ const Face = ({ side, angle, style }) => (
 );
 
 const SineWave = ({ angle }) => {
-  const numPoints = 16;
+  const numPoints = 84;
   const Origin = graphSize / 2;
   const Frequency = (Math.PI * 2) / numPoints;
   const Phase = (angle * Math.PI * numSides) / 180;
   const Amplitude = graphSize / 2;
 
   return [...Array(numPoints).keys()].map(i => (
-    <circle
-      key={i}
-      cx={(graphSize / numPoints) * i}
-      cy={Origin + Math.sin(Frequency * i + Phase) * Amplitude}
-      r={1}
-      style={{ fill: `hsla(${(360 / numPoints) * i}, 100%, 50%)` }}
-    />
+    <g key={i}>
+      <circle
+        key={i}
+        cx={(graphSize / numPoints) * i}
+        cy={Origin + Math.sin(Frequency * i + Phase) * Amplitude}
+        r={1}
+        style={{ fill: `hsl(${(360 / numPoints) * i}, 100%, 50%)` }}
+      />
+      <line
+        x1={(graphSize / numPoints) * i}
+        x2={(graphSize / numPoints) * i}
+        y1={graphSize}
+        y2={Origin + Math.sin(Frequency * i + Phase) * Amplitude}
+        style={{
+          stroke: `hsla(${180 - (360 / numPoints) * i}, 100%, 25%, 0.15)`
+        }}
+      />
+    </g>
   ));
 };
