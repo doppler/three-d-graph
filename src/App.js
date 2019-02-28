@@ -3,7 +3,9 @@ import "./App.css";
 
 const graphDivs = 1;
 const graphSize = 250;
-const numSides = 4;
+const numSides = 6;
+const translateLength =
+  graphSize / 2 / Math.tan(((360 / numSides / 2) * Math.PI) / 180);
 
 const App = () => {
   const [angle, setAngle] = useState(45);
@@ -12,9 +14,14 @@ const App = () => {
   useEffect(() => {
     cancelAnimationFrame(frame);
     requestAnimationFrame(() =>
-      setAngle(angle => (angle === 89 ? 0 : angle + 1))
+      setAngle(angle => (angle === 360 / numSides - 1 ? 0 : angle + 0.2))
     );
   }, [angle]);
+  useEffect(() => {
+    document
+      .getElementById("Scene")
+      .style.setProperty("perspective", `${translateLength * 2.5}px`);
+  });
   return (
     <div id="App">
       <div id="Scene">
@@ -36,7 +43,8 @@ const Face = ({ side, angle, style }) => (
       ...style,
       width: graphSize,
       height: graphSize,
-      transform: `rotateY(${(360 / numSides) * side}deg) translateZ(125px)`
+      transform: `rotateY(${(360 / numSides) *
+        side}deg) translateZ(${translateLength}px)`
     }}
   >
     <svg width={graphSize} height={graphSize}>
@@ -55,10 +63,10 @@ const Face = ({ side, angle, style }) => (
 );
 
 const SineWave = ({ angle }) => {
-  const numPoints = 16 - (angle % 8);
+  const numPoints = 16;
   const Origin = graphSize / 2;
   const Frequency = (Math.PI * 2) / numPoints;
-  const Phase = (angle * Math.PI * 4) / 180;
+  const Phase = (angle * Math.PI * numSides) / 180;
   const Amplitude = graphSize / 2;
 
   return [...Array(numPoints).keys()].map(i => (

@@ -1,5 +1,5 @@
 #App {
-  background-color: hsl(240, 50%, 10%);
+  background-color: hsl(240, 50%, 2%);
   height: 100vh;
   color: white;
 }
@@ -9,7 +9,7 @@
   position: relative;
   top: calc(100vh / 2 - 125px);
   left: calc(100vw / 2 - 125px);
-  perspective: 500px;
+  perspective: 520px;
 }
 #Cube {
   position: relative;
@@ -25,9 +25,8 @@
 }
 
 line {
-  stroke: hsla(270, 100%, 50%, 0.25);
+  stroke: hsla(90, 100%, 50%, 0.25);
 }
 circle {
   stroke-width: 0;
-  fill: hsl(90, 100%, 50%);
 }
