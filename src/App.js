@@ -1,16 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 
 const App = () => {
   const graphDivs = 1;
   const graphSize = 250;
 
+  const [angle, setAngle] = useState(45);
+
+  let frame;
+  useEffect(() => {
+    cancelAnimationFrame(frame);
+    requestAnimationFrame(() =>
+      setAngle(angle => (angle === 89 ? 0 : angle + 1))
+    );
+  }, [angle]);
   return (
     <div id="App">
       <div id="Scene">
-        <div id="Cube">
+        <div id="Cube" style={{ transform: `rotateY(${angle}deg)` }}>
           {["front", "left", "right", "back"].map(side => (
-            <Face {...{ graphSize, graphDivs, id: side }} />
+            <Face {...{ graphSize, graphDivs, angle, id: side }} />
           ))}
         </div>
       </div>
@@ -19,7 +28,7 @@ const App = () => {
 };
 export default App;
 
-const Face = ({ id, graphSize, graphDivs }) => (
+const Face = ({ id, graphSize, graphDivs, angle }) => (
   <div className="Face" id={id} style={{ width: graphSize, height: graphSize }}>
     <svg width={graphSize} height={graphSize}>
       {[...Array(graphDivs + 1).keys()].map(i => {
@@ -28,7 +37,7 @@ const Face = ({ id, graphSize, graphDivs }) => (
           <g key={i} id="grid">
             <line x1={0} x2={graphSize} y1={w} y2={w} />
             <line y1={0} y2={graphSize} x1={w} x2={w} />
-            <SineWave {...{ graphSize }} />
+            <SineWave {...{ graphSize, angle }} />
           </g>
         );
       })}
@@ -36,7 +45,7 @@ const Face = ({ id, graphSize, graphDivs }) => (
   </div>
 );
 
-const SineWave = ({ graphSize }) => {
+const SineWave = ({ graphSize, angle }) => {
   const divs = 200;
   return [...Array(divs).keys()].map(i => (
     <circle

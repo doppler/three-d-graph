@@ -42,7 +42,7 @@
   }
 }
 #Cube {
-  animation: spin 5s linear infinite;
+  /* animation: spin 5s linear infinite; */
   /* transform: rotateY(22.5deg); */
 }
 svg {
