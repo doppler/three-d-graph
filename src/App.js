@@ -28,7 +28,7 @@ const Face = ({ id, graphSize, graphDivs }) => (
           <g key={i} id="grid">
             <line x1={0} x2={graphSize} y1={w} y2={w} />
             <line y1={0} y2={graphSize} x1={w} x2={w} />
-            <SineWave {...{ graphSize, graphDivs }} />
+            <SineWave {...{ graphSize }} />
           </g>
         );
       })}
@@ -36,7 +36,7 @@ const Face = ({ id, graphSize, graphDivs }) => (
   </div>
 );
 
-const SineWave = ({ graphSize, graphDivs }) => {
+const SineWave = ({ graphSize }) => {
   const divs = 200;
   return [...Array(divs).keys()].map(i => (
     <circle
