@@ -9,7 +9,7 @@
   position: relative;
   top: calc(100vh / 2 - 125px);
   left: calc(100vw / 2 - 125px);
-  perspective: 1000px;
+  perspective: 500px;
 }
 #Cube {
   position: relative;
@@ -38,15 +38,15 @@
 }
 @keyframes spin {
   100% {
-    transform: rotateY(360deg);
+    transform: rotateY(90deg);
   }
 }
 #Cube {
-  /* animation: spin 5s linear infinite; */
-  transform: rotateY(22.5deg);
+  animation: spin 5s linear infinite;
+  /* transform: rotateY(22.5deg); */
 }
 svg {
-  background-color: hsla(240, 50%, 75%, 0.5);
+  background-color: hsla(270, 100%, 50%, 0.1);
 }
 
 circle,
@@ -56,5 +56,9 @@ rect {
 line,
 circle,
 rect {
-  stroke: hsl(250, 50%, 100%);
+  stroke: hsla(90, 100%, 50%, 0.5);
+}
+circle {
+  stroke-width: 0;
+  fill: hsl(90, 100%, 50%);
 }
