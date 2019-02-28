@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/three-d-graph/precache-manifest.39dd858f6c58f40b68483e8667694627.js"
+  "/three-d-graph/precache-manifest.98d185a34666b104a11efd04683e053f.js"
 );
 
 workbox.clientsClaim();
